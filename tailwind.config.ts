@@ -9,8 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        // background: "var(--background)",
+        // foreground: "var(--foreground)",
+        amazon_blue: {
+          light: "#232F3E",
+          DEFAULT: "#131921",
+        },
+        amazon_search_focus: {
+          focus: "#cd7b00",
+        },
       },
     },
   },

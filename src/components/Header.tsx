@@ -4,6 +4,7 @@ import {
   MagnifyingGlassIcon,
   ShoppingCartIcon,
   MapPinIcon,
+  Bars3Icon,
 } from "@heroicons/react/24/outline";
 
 const Header = () => {
@@ -45,7 +46,7 @@ const Header = () => {
           </div>
 
           <div className="flex items-center link">
-            <span className="absolute right-4 top-0 md:right-10 bg-yellow-600 h-4 w-4 text-center rounded-full text-black font-bold leading-[15px]">
+            <span className="absolute right-4 top-0 md:right-10 bg-yellow-600 h-4 w-4 text-center rounded-full text-black font-bold leading-[14px]">
               0
             </span>
             <ShoppingCartIcon className="h-10" />
@@ -55,7 +56,21 @@ const Header = () => {
       </div>
 
       {/* Bottom navigation container */}
-      <div></div>
+      <div className="flex bg-amazon_blue-light space-x-3 p-2">
+        <p className="flex font-semibold">
+          <Bars3Icon className="h-6 stroke-2 mr-0.5" />
+          All
+        </p>
+        <p className="link">Prime Video</p>
+        <p className="link">Amazon Business</p>
+        <p className="link">Today's Deals</p>
+        <p className="link hidden lg:inline">Electronics</p>
+        <p className="link hidden lg:inline">Food & Groceries</p>
+        <p className="link hidden lg:inline">Prime</p>
+        <p className="link hidden lg:inline">Buy Again</p>
+        <p className="link hidden lg:inline">Shopper Toolkit</p>
+        <p className="link hidden lg:inline">Health & Personal Care</p>
+      </div>
     </header>
   );
 };

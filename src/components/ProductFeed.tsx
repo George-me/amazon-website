@@ -1,7 +1,13 @@
 import React from "react";
+import Product from "./Product";
 
-interface Products {
+export interface Products {
+  id: number;
   title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
 }
 
 const ProductFeed = async () => {
@@ -11,8 +17,8 @@ const ProductFeed = async () => {
 
   return (
     <div>
-      {products.map((prod: Products) => (
-        <p>{prod.title}</p>
+      {products.map((product: Products) => (
+        <Product key={product.id} product={product} />
       ))}
     </div>
   );

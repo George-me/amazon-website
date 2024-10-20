@@ -13,6 +13,7 @@ const Banner = () => {
   const banners = [amazonbg1, amazonbg2, amazonbg3, amazonbg4, amazonbg5];
   return (
     <div className="relative">
+      <div className="absolute h-36 w-full bg-gradient-to-t from-gray-100 to-transparent bottom-0 z-20" />
       <Carousel
         autoPlay
         infiniteLoop

@@ -1,5 +1,7 @@
 import React from "react";
 import Product from "./Product";
+import Image from "next/image";
+import banner1 from "../app/assets/banner_1.jpg";
 
 export interface Products {
   id: number;
@@ -16,8 +18,14 @@ const ProductFeed = async () => {
   );
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {products.map((product: Products) => (
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-52">
+      {products.slice(0, 4).map((product: Products) => (
+        <Product key={product.id} product={product} />
+      ))}
+
+      <Image className="md:col-span-full" alt="banner" src={banner1} />
+
+      {products.slice(5, products.length).map((product: Products) => (
         <Product key={product.id} product={product} />
       ))}
     </div>

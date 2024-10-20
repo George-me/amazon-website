@@ -22,7 +22,7 @@ const Banner = () => {
         interval={5000}
       >
         {banners.map((banner, index) => (
-          <div>
+          <div key={index}>
             <Image src={banner} alt={`Banner ${index + 1}`} />
           </div>
         ))}

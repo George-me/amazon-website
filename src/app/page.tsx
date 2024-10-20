@@ -4,7 +4,7 @@ import ProductFeed from "@/components/ProductFeed";
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-gray-100">
       <Header />
 
       <main className="max-w-screen-2xl mx-auto">

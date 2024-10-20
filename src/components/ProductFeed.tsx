@@ -16,7 +16,7 @@ const ProductFeed = async () => {
   );
 
   return (
-    <div>
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {products.map((product: Products) => (
         <Product key={product.id} product={product} />
       ))}

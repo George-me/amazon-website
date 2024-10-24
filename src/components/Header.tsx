@@ -56,7 +56,7 @@ const Header = () => {
       </div>
 
       {/* Bottom navigation container */}
-      <div className="flex bg-amazon_blue-light space-x-3 p-2">
+      <div className="flex bg-amazon_blue-light space-x-3 p-2 text-white">
         <p className="flex font-semibold">
           <Bars3Icon className="h-6 stroke-2 mr-0.5" />
           All

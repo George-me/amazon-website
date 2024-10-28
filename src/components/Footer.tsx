@@ -1,4 +1,3 @@
-import React from "react";
 import amazonLogo from "../app/assets/amazon_logo_white.png";
 import Image from "next/image";
 import { ChevronDownIcon, GlobeAltIcon } from "@heroicons/react/24/outline";
@@ -88,8 +87,10 @@ const Footer = () => {
           <div key={index} className="px-2.5">
             <h2 className="font-bold">{title}</h2>
             <ul>
-              {items.map((item) => (
-                <li className="text-sm my-2 link">{item}</li>
+              {items.map((item, index) => (
+                <li key={index} className="text-sm my-2 link">
+                  {item}
+                </li>
               ))}
             </ul>
           </div>
@@ -132,8 +133,11 @@ const Footer = () => {
       <div className="bg-[#131A22] ">
         <div className="w-8/12 mx-auto">
           <div className="grid grid-cols-4 gap-4 gap-x-40 text-xs py-8 mt-8">
-            {footerLinks2.map(({ title, line1, line2 }) => (
-              <div className="text-nowrap link decoration-[#999999]">
+            {footerLinks2.map(({ title, line1, line2 }, index) => (
+              <div
+                key={index}
+                className="text-nowrap link decoration-[#999999]"
+              >
                 <span>{title}</span>
                 <p className="text-[#999999]">
                   {line1} <br /> {line2}

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { StarIcon } from "@heroicons/react/24/solid";
 import amazonPrime from "../app/assets/prime.png";
 

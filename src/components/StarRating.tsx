@@ -2,20 +2,33 @@
 import React, { useState } from "react";
 import { StarIcon } from "@heroicons/react/24/solid";
 
-const StarRating = () => {
-  const [selectedStars, setSelectedStars] = useState<number>(4);
+interface Props {
+  clickable: boolean;
+  rating?: number;
+}
+
+const StarRating = ({ clickable, rating }: Props) => {
+  const [selectedStars, setSelectedStars] = useState<number>(
+    clickable ? 4 : rating || 0
+  );
   const [hoveredStars, setHoveredStars] = useState<number | null>(null);
 
   const handleStarClick = (starIndex: number) => {
-    setSelectedStars(starIndex + 1);
+    if (clickable) {
+      setSelectedStars(starIndex + 1);
+    }
   };
 
   const handleMouseEnter = (starIndex: number) => {
-    setHoveredStars(starIndex + 1);
+    if (clickable) {
+      setHoveredStars(starIndex + 1);
+    }
   };
 
   const handleMouseLeave = () => {
-    setHoveredStars(null);
+    if (clickable) {
+      setHoveredStars(null);
+    }
   };
 
   return (

@@ -1,7 +1,20 @@
+import ProductCard from "@/components/ProductCard";
 import SideBar from "./SideBar";
 import Heading from "./TopBar";
 
-export default function Products() {
+export interface Products {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+}
+
+export default async function Products() {
+  const products = await fetch("https://fakestoreapi.com/products").then(
+    (res) => res.json()
+  );
   return (
     <div>
       <Heading />
@@ -13,7 +26,13 @@ export default function Products() {
         </div>
 
         {/* Right Columns with Products */}
-        <div className="flex-1 bg-sky-400">Right Column</div>
+        <div className="flex-1">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {products.map((product: Products) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

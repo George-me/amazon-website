@@ -65,7 +65,7 @@ const SideBar = () => {
 
                     {type === "rating" && (
                       <>
-                        <StarRating />
+                        <StarRating clickable={true} />
                         <span className="text-xs sideLink ml-1 mb-0.5 font-semibold">
                           & Up
                         </span>

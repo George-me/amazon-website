@@ -28,12 +28,14 @@ const ProductCard = ({
   const [coupon, setCoupon] = useState(false);
   const [buyingOpts, setBuyingOpts] = useState(false);
   const [limited, setLimited] = useState(false);
+  const [best, setBest] = useState(false);
   const [prime, setPrime] = useState(false);
 
   useEffect(() => {
     setPrime(Math.random() < 0.5);
     setCoupon(Math.random() < 0.5);
     setBuyingOpts(Math.random() < 0.5);
+    setBest(Math.random() > 0.93);
     setLimited(Math.random() < 0.5);
   }, []);
 
@@ -44,13 +46,19 @@ const ProductCard = ({
     >
       {/* Item image in card  */}
       <div className="pt-[26px] px-2 mb-2 bg-[#F7F7F7]">
+        {best && (
+          <div className="trapezium absolute top-0 left-0 bg-[#C45500] text-white text-xs px-2.5 py-1 pr-3.5">
+            Best Seller
+          </div>
+        )}
+
         <Image
           src={image}
           alt={title}
           height={208}
           width={242}
           objectFit="contain"
-          className="my-2 self-center object-contain h-52 w-full"
+          className="my-2 cursor-pointer self-center object-contain h-52 w-full"
         />
       </div>
 

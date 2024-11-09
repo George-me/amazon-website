@@ -5,6 +5,7 @@ import {
   ChevronDownIcon,
   InformationCircleIcon,
 } from "@heroicons/react/24/solid";
+import { ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/outline";
 
 const buyingOptions = [
   {
@@ -98,7 +99,7 @@ const PMColumn = () => {
       {/* Buying options icons */}
       <div className="flex space-x-8 ml-4">
         {buyingOptions.map(({ img, text1, text2 }) => (
-          <div className="flex flex-col items-center text-center">
+          <div className="flex flex-col items-center text-center cursor-pointer">
             <Image src={img} width={35} height={35} alt="buying options" />
             <p className="text-xs mt-1.5 text-[#007185]">
               {text1} <br /> {text2}
@@ -106,7 +107,89 @@ const PMColumn = () => {
           </div>
         ))}
       </div>
-      <div className="mb-4 mt-1.5 border-b-[1px] border-[#BBBFBF]" />
+
+      {/* Horizontal Line */}
+      <div className="mb-5 mt-1.5 border-b-[1px] border-[#BBBFBF]" />
+
+      <p className="text-sm mb-2">
+        Available at a lower price from{" "}
+        <span className="sideLink text-[#007185] hover:underline">
+          other sellers
+        </span>{" "}
+        that may not offer free Prime shipping.
+      </p>
+
+      {/* Prime Saving */}
+      <div className="flex flex-wrap lg:flex-nowrap text-sm line-clamp-1 group cursor-pointer">
+        <p className="font-bold line-clamp-1 text-[#007185] group-hover:text-[#c45500]">
+          Prime Savings Extra 10% off with Mastercard Cards. Enter code MC75 at
+          checkout. Discount by Amazon.
+        </p>
+        <span className="flex items-end ml-[11px] mr-[15px] font-semibold">
+          <span className="text-sm text-nowrap text-[#007185] mr-1 group-hover:text-[#c45500]">
+            1 Applicable Promotion
+          </span>
+          <ChevronDownIcon className="h-4 w-4 stroke-2 text-black" />
+        </span>
+      </div>
+
+      {/* Horizontal Line */}
+      <div className="mb-3.5 mt-1 border-b-[1px] border-[#BBBFBF]" />
+
+      <div className="mb-4">
+        <h1 className="text-base font-bold pb-1">About this item</h1>
+        <ul className="text-sm list-disc pl-[18px] pr-5">
+          <li>
+            A FIT THAT WON’T QUIT: To help you achieve the perfect fit, a trio
+            of eartip and stability band sizes are included to ensure your
+            Bluetooth earbuds feel comfortable, snug, and secure
+          </li>
+          <li>
+            FULL CONTROL WITH THE BOSE QCE APP: Seamlessly control EQ settings
+            like bass, mid-range, and treble levels to perfectly customize the
+            sound, or use the app to check battery life and manage connected
+            devices
+          </li>
+          <li>
+            POWERFUL, PROVEN AUDIO: Get into it while you get after it, these
+            IPX4-rated Bluetooth wireless earphones feature remarkable sound
+            quality for a satisfyingly rich listening experience that hits all
+            the right notes
+          </li>
+        </ul>
+      </div>
+
+      <div className="flex items-end">
+        <ChatBubbleBottomCenterTextIcon className="h-5 w-5 stroke-2" />
+        <span className="text-sm sideLink text-[#007185] ml-3 hover:underline">
+          Report an issue with this product
+        </span>
+      </div>
+
+      {/* Horizontal Line */}
+      <div className="mb-4 mt-0.5 border-b-[1px] border-[#BBBFBF]" />
+      <div className="flex">
+        <Image
+          src="https://m.media-amazon.com/images/G/39/AHS_UAE/2023/EW/EW_HQP_75x75._SS75_CB581149081_.png"
+          width={75}
+          height={75}
+          alt="warranty"
+          className="w-[75px] h-[75px] mr-2.5"
+        />
+
+        <p className="text-sm mr-10">
+          <span className="font-bold">
+            Extended warranties and protection plans
+          </span>{" "}
+          <br />
+          Our extended warranty and protection plan helps keep your item safe
+          for longer periods. Get 10% off with Prime. Extend your coverage
+          today.{" "}
+          <span className="text-[#007185] sideLink hover:underline">
+            Learn more
+          </span>
+        </p>
+      </div>
     </div>
   );
 };

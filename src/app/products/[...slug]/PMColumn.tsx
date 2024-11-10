@@ -86,6 +86,8 @@ const PMColumn = () => {
         </span>
         <ChevronDownIcon className="h-4 w-4 stroke-2" />
       </div>
+      <p className="text-sm mb-2">All prices include VAT.</p>
+
       <p className="font-bold text-sm">
         Buy with 0% installments and pay AED 54.08 for 12 months with select
         banks.
@@ -168,6 +170,7 @@ const PMColumn = () => {
 
       {/* Horizontal Line */}
       <div className="mb-4 mt-0.5 border-b-[1px] border-[#BBBFBF]" />
+
       <div className="flex">
         <Image
           src="https://m.media-amazon.com/images/G/39/AHS_UAE/2023/EW/EW_HQP_75x75._SS75_CB581149081_.png"

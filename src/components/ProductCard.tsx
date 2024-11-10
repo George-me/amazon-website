@@ -45,7 +45,7 @@ const ProductCard = ({
       className="relative flex flex-col rounded-[4px] overflow-hidden bg-white m-1 z-30 border"
     >
       {/* Item image in card  */}
-      <div className="pt-[26px] px-2 mb-2 bg-[#F7F7F7]">
+      <div className="relative pt-[26px] px-2 mb-2">
         {best && (
           <div className="trapezium absolute top-0 left-0 bg-[#C45500] text-white text-xs px-2.5 py-1 pr-3.5">
             Best Seller
@@ -60,6 +60,9 @@ const ProductCard = ({
           objectFit="contain"
           className="my-2 cursor-pointer self-center object-contain h-52 w-full"
         />
+
+        {/* Grey background for product images */}
+        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-[0.05] pointer-events-none" />
       </div>
 
       <div className="px-2 mb-2">

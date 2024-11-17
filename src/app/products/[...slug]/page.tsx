@@ -3,6 +3,9 @@ import CategoryNav from "./CategoryNav";
 import PLeftColumn from "./PLeftColumn";
 import PMColumn from "./PMColumn";
 import PRightColumn from "./PRightColumn";
+import StarRating from "@/components/StarRating";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import Carousel from "@/components/Carousel";
 
 const buyWithItems = [
   {
@@ -88,6 +91,7 @@ const page = ({ params: { slug } }: Props) => {
               </div>
             </div>
 
+            {/* Plus icon separator */}
             {index + 1 < buyWithItems.length && (
               <span className="my-[60px] mx-1 text-[28px] text-[#565959] font-semibold">
                 +
@@ -95,6 +99,92 @@ const page = ({ params: { slug } }: Props) => {
             )}
           </div>
         ))}
+
+        {/* Add all to cart button */}
+        <div className="flex flex-col ml-3 h-32 items-center justify-center">
+          <div className="flex items-baseline">
+            <span className="text-sm font-medium self-center mr-2">
+              Total price:
+            </span>
+            <span className="text-xs mt-1 self-start mr-1">AED</span>
+            <span className="text-lg font-medium">2,197.00</span>
+          </div>
+          <button className="w-full mt-0.5 rounded-full text-center text-sm text-nowrap px-24 py-1.5 cursor-pointer bg-[#ffd814] hover:bg-[#F7CA00] focus:outline-none focus:ring focus:ring-[#007185] focus:ring-offset-[1.5px] active:bg-[#F0B800]">
+            Add all 3 to Cart
+          </button>
+        </div>
+      </div>
+
+      {/* Horizontal Line */}
+      <div className="m-4 my-4 border-b-[1px] border-[#BBBFBF]" />
+
+      {/* Product Details */}
+      <div className="px-[18px] space-y-[5.5px]">
+        <h2 className="text-[21px] font-bold">Product details</h2>
+        <div className="px-[18px]">
+          <ul className="text-sm space-y-[5.5px]">
+            <li>
+              <span className="font-bold">Batteries :</span> 1 Lithium Ion
+              batteries required. (included)
+            </li>
+            <li>
+              <span className="font-bold">
+                Is Discontinued By Manufacturer :
+              </span>{" "}
+              No
+            </li>
+            <li>
+              <span className="font-bold">Product Dimensions :</span> 4.83 x
+              7.01 x 3.51 cm; 68.95 g
+            </li>
+            <li>
+              <span className="font-bold">Date First Available :</span> 18
+              September 2024
+            </li>
+            <li>
+              <span className="font-bold">Manufacturer :</span> Bose
+            </li>
+            <li>
+              <span className="font-bold">ASIN :</span> B0D8BZDPXB
+            </li>
+            <li>
+              <span className="font-bold">Item model number :</span> 888507-0100
+            </li>
+            <li>
+              <span className="font-bold">Country of origin :</span> China
+            </li>
+            <li>
+              <span className="font-bold">Best Sellers Rank:</span> #2,067 in
+              Electronics (
+              <span className="sideLink text-[#007185] hover:underline">
+                See Top 100 in Electronics
+              </span>
+              ) <br /> #227 in{" "}
+              <span className="sideLink text-[#007185] hover:underline">
+                In-Ear Headphones
+              </span>
+            </li>
+            <li className="flex space-x-1 items-end">
+              <span className="font-bold">Customer reviews: </span>{" "}
+              <span>4.2</span>
+              <StarRating clickable={false} rating={4} />
+              <ChevronDownIcon className="h-4 w-4 stroke-2" />
+              <span className="text-sm pl-5 sideLink text-[#007185] hover:underline">
+                389 ratings
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Horizontal Line */}
+      <div className="m-4 my-2 border-b-[1px] border-[#BBBFBF]" />
+
+      <div className="px-[18px]">
+        <h2 className="text-[21px] mb-5 font-bold">
+          What other items do customers buy after viewing this item?
+        </h2>
+        <Carousel />
       </div>
 
       {/* Horizontal Line */}

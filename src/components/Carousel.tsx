@@ -1,8 +1,7 @@
 import React from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import CarouselCardItem from "./CarouselCardItem";
-
-const items = [1, 2, 3, 4, 5, 6];
+import { CarouselData } from "./CarouselData";
 
 const Carousel = () => {
   return (
@@ -14,16 +13,16 @@ const Carousel = () => {
       </div>
 
       <div className="grid grid-cols-2 w-full sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 justify-items-center">
-        {items.map((_, index) => (
+        {CarouselData.map((item, index) => (
           <div
             key={index}
             className={`${index > 1 && "hidden"} sm:${
               index > 2 && "hidden" && index <= 3 && "block"
             } md:${index > 1 && "hidden" && index <= 3 && "block"} lg:${
               index > 0 && "hidden" && index <= 4 && "block"
-            } xl:${"block"}`}
+            } xl:${index > 0 && "hidden" && index <= 5 && "block"}`}
           >
-            <CarouselCardItem />
+            <CarouselCardItem item={item} />
           </div>
         ))}
       </div>

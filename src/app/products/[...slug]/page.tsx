@@ -6,6 +6,9 @@ import PRightColumn from "./PRightColumn";
 import StarRating from "@/components/StarRating";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import Carousel from "@/components/Carousel";
+import SearchReviews from "./ReviewSection/SearchReviews";
+import Reviews from "./ReviewSection/Reviews";
+import BottomSign from "../BottomSign";
 
 const buyWithItems = [
   {
@@ -55,7 +58,7 @@ const page = ({ params: { slug } }: Props) => {
 
       <div className="flex pl-6">
         {buyWithItems.map(({ img, description }, index) => (
-          <div className="flex">
+          <div key={index} className="flex">
             <div className="w-[213px]">
               <div className="relative flex justify-center py-2 rounded-xl">
                 <Image src={img} width={140} height={140} alt="Buy it item" />
@@ -65,7 +68,7 @@ const page = ({ params: { slug } }: Props) => {
 
                 <input
                   type="checkbox"
-                  checked
+                  defaultChecked
                   className="absolute top-2 right-2 form-checkbox accent-[#007185] rounded transform scale-125"
                 />
               </div>
@@ -189,6 +192,19 @@ const page = ({ params: { slug } }: Props) => {
 
       {/* Horizontal Line */}
       <div className="m-4 my-4 border-b-[1px] border-[#BBBFBF]" />
+
+      <div className="px-[18px] mb-6">
+        <SearchReviews />
+      </div>
+
+      {/* Horizontal Line */}
+      <div className="m-4 my-4 border-b-[1px] border-[#BBBFBF]" />
+
+      <div className="px-[18px] mb-6">
+        <Reviews />
+      </div>
+
+      <BottomSign />
     </div>
   );
 };

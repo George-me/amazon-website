@@ -100,8 +100,11 @@ const PMColumn = () => {
 
       {/* Buying options icons */}
       <div className="flex space-x-8 ml-4">
-        {buyingOptions.map(({ img, text1, text2 }) => (
-          <div className="flex flex-col items-center text-center cursor-pointer">
+        {buyingOptions.map(({ img, text1, text2 }, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center text-center cursor-pointer"
+          >
             <Image src={img} width={35} height={35} alt="buying options" />
             <p className="text-xs mt-1.5 text-[#007185]">
               {text1} <br /> {text2}

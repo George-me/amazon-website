@@ -49,8 +49,8 @@ const Product = ({
       <div className="flex">
         {Array(rating)
           .fill(null)
-          .map((_, i) => (
-            <StarIcon key={i} className="h-5 text-yellow-500" />
+          .map((_, index) => (
+            <StarIcon key={index} className="h-5 text-yellow-500" />
           ))}
       </div>
 

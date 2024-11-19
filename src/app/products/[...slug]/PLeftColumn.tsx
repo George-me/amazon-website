@@ -22,6 +22,7 @@ const PLeftColumn = () => {
       <div className="flex-shrink-0" id="vertical-image-selection">
         {productInfo.imgUrl.map((img, index) => (
           <Image
+            key={index}
             src={img}
             width={40}
             height={41}

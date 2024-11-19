@@ -14,8 +14,8 @@ const SideBar = () => {
       <span className="text-sm font-bold">{primeData.title}</span>
 
       <div className="-space-y-4">
-        {primeData.data.map((text) => (
-          <label className="flex items-center">
+        {primeData.data.map((text, index) => (
+          <label key={index} className="flex items-center">
             <input
               type="checkbox"
               className="form-checkbox accent-[#007185] rounded transform scale-125"

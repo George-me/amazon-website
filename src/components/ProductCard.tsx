@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import amazonPrime from "../app/assets/amazon_prime_icon.png";
 import StarRating from "./StarRating";
+import Link from "next/link";
 
 interface Props {
   product: {
@@ -52,14 +53,16 @@ const ProductCard = ({
           </div>
         )}
 
-        <Image
-          src={image}
-          alt={title}
-          height={208}
-          width={242}
-          objectFit="contain"
-          className="my-2 cursor-pointer self-center object-contain h-52 w-full"
-        />
+        <Link href={`/products/${id}`}>
+          <Image
+            src={image}
+            alt={title}
+            height={208}
+            width={242}
+            objectFit="contain"
+            className="my-2 cursor-pointer self-center object-contain h-52 w-full"
+          />
+        </Link>
 
         {/* Grey background for product images */}
         <div className="absolute top-0 left-0 w-full h-full bg-black opacity-[0.05] pointer-events-none" />
@@ -67,9 +70,11 @@ const ProductCard = ({
 
       <div className="px-2 mb-2">
         {/* Item Name */}
-        <h4 className="sideLink my-2 text-base font-medium line-clamp-4">
-          {title}
-        </h4>
+        <Link href={`/products/${id}`}>
+          <h4 className="sideLink my-2 text-base font-medium line-clamp-4">
+            {title}
+          </h4>
+        </Link>
 
         {/* Star Rating */}
         <div className="pt-1">

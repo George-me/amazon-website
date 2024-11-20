@@ -184,9 +184,6 @@ const page = ({ params: { slug } }: Props) => {
       <div className="m-4 my-2 border-b-[1px] border-[#BBBFBF]" />
 
       <div className="px-[18px]">
-        <h2 className="text-[21px] mb-5 font-bold">
-          What other items do customers buy after viewing this item?
-        </h2>
         <Carousel />
       </div>
 

@@ -19,6 +19,9 @@ const config: Config = {
           focus: "#cd7b00",
         },
       },
+      screens: {
+        xs: "300px", // 3 items
+      },
     },
   },
   plugins: [],

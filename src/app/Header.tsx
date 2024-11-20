@@ -23,13 +23,19 @@ const Header = () => {
 
         {/* Search bar */}
         <div className="hidden md:flex flex-grow focus-within:bg-amazon_search_focus-focus rounded-lg p-[3px]">
+          <div className="flex items-center justify-center cursor-pointer select-none bg-[#E6E6E6] text-[#555555] hover:bg-[#D4D4D4] hover:text-black px-1.5 border-r border-gray-300 rounded-l-md">
+            <span className="text-xs font-semibold px-1">All</span>
+            <span className="text-xl self-end">🢓</span>
+          </div>
+
           <input
             type="text"
-            className="h-10 flex-grow rounded-l-md focus:outline-none px-4"
+            placeholder="Search Amazon.ae"
+            className="h-10 flex-grow focus:outline-none px-2.5"
           />
 
-          <button className="btn bg-yellow-600 rounded-r-md text-white px-0.5">
-            <MagnifyingGlassIcon className="h-10 p-2" />
+          <button className="btn bg-[#febd69] hover:bg-[#F3A847] rounded-r-md text-white px-0.5">
+            <MagnifyingGlassIcon className="h-10 p-2 text-black" />
           </button>
         </div>
 
@@ -56,8 +62,8 @@ const Header = () => {
       </div>
 
       {/* Bottom navigation container */}
-      <div className="flex bg-amazon_blue-light space-x-3 p-2 text-white">
-        <p className="flex font-semibold">
+      <div className="flex items-center text-sm bg-amazon_blue-light space-x-3 px-2 pb-2 pt-1 text-white">
+        <p className="flex items-center font-semibold">
           <Bars3Icon className="h-6 stroke-2 mr-0.5" />
           All
         </p>

@@ -4,25 +4,19 @@ import { useEffect, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import amazonPrime from "../app/assets/amazon_prime_icon.png";
 import StarRating from "./StarRating";
+import { Items, ItemImages } from "@prisma/client";
 import Link from "next/link";
-
-interface Props {
-  product: {
-    id: number;
-    title: string;
-    price: number;
-    description: string;
-    category: string;
-    image: string;
-  };
-}
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const Min_rating = 1;
 const Max_rating = 5;
 
-const ProductCard = ({
-  product: { id, title, price, description, category, image },
-}: Props) => {
+interface Props {
+  item: Items;
+}
+
+const ProductCard = ({ item: { item_asin, item_name } }: Props) => {
   const [rating] = useState(
     Math.floor(Min_rating + Math.random() * (Max_rating - Min_rating + 1))
   );
@@ -31,6 +25,21 @@ const ProductCard = ({
   const [limited, setLimited] = useState(false);
   const [best, setBest] = useState(false);
   const [prime, setPrime] = useState(false);
+
+  const {
+    data: itemImages,
+    error,
+    isLoading,
+  } = useQuery<ItemImages>({
+    queryKey: ["itemImages", item_asin],
+    queryFn: () =>
+      axios.get(`/api/items/images/${item_asin}`).then((res) => res.data),
+    retry: 5,
+  });
+
+  useEffect(() => {
+    console.log("Fetched Images:", itemImages); // Add this line
+  }, [itemImages]);
 
   useEffect(() => {
     setPrime(Math.random() < 0.5);
@@ -42,7 +51,7 @@ const ProductCard = ({
 
   return (
     <div
-      key={id}
+      key={item_asin}
       className="relative flex flex-col rounded-[4px] overflow-hidden bg-white m-1 z-30 border"
     >
       {/* Item image in card  */}
@@ -53,10 +62,10 @@ const ProductCard = ({
           </div>
         )}
 
-        <Link href={`/products/${id}`}>
+        <Link href={`/products/${item_asin}`}>
           <Image
-            src={image}
-            alt={title}
+            src={itemImages?.item_images_url || ""}
+            alt={item_name}
             height={208}
             width={242}
             objectFit="contain"
@@ -70,9 +79,9 @@ const ProductCard = ({
 
       <div className="px-2 mb-2">
         {/* Item Name */}
-        <Link href={`/products/${id}`}>
+        <Link href={`/products/${item_asin}`}>
           <h4 className="sideLink my-2 text-base font-medium line-clamp-4">
-            {title}
+            {item_name}
           </h4>
         </Link>
 

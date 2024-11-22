@@ -1,0 +1,175 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Items {
+  item_asin         String        @id
+  item_name         String
+  item_url          String
+  item_brand        String
+  item_brand_url    String
+  item_category     String
+  item_sub_category String
+  item_length_cm    Decimal  @db.Decimal(10, 2)
+  item_width_cm     Decimal  @db.Decimal(10, 2)
+  item_height_cm    Decimal  @db.Decimal(10, 2)
+  item_weight_g     Decimal  @db.Decimal(10, 2)
+  ItemImages        ItemImages[]
+  SellerItems       SellerItems[]
+  OrderItems        OrderItems[]
+}
+
+model ItemImages {
+  item_images_id  Int    @id @default(autoincrement())
+  item_asin       String @map("item_asin")
+  item_images_url String
+  item            Items  @relation(fields: [item_asin], references: [item_asin])
+}
+
+model Orders {
+  order_id                     Int          @id @default(autoincrement())
+  cus_id                       Int
+  order_address                String
+  order_date                   DateTime
+  order_status                 String
+  order_expected_delivery_date DateTime
+  Customer                     Customer     @relation(fields: [cus_id], references: [cus_id])
+  OrderItems                   OrderItems[]
+  OrderPacks                   OrderPacks[]
+  Shipment                     Shipment[]
+}
+
+model OrderItems {
+  order_items_id       Int        @id @default(autoincrement())
+  order_id             Int
+  order_pack_id        Int
+  seller_id            Int
+  item_asin            String
+  order_items_prime    Boolean
+  order_items_quantity Int
+  order_items_status   String
+  Orders               Orders     @relation(fields: [order_id], references: [order_id])
+  OrderPacks           OrderPacks @relation(fields: [order_pack_id], references: [order_pack_id])
+  Sellers              Sellers    @relation(fields: [seller_id], references: [seller_id])
+  Items                Items      @relation(fields: [item_asin], references: [item_asin])
+}
+
+model OrderPacks {
+  order_pack_id              Int          @id @default(autoincrement())
+  order_id                   Int
+  pack_id                    Int
+  order_pack_tracking_number String
+  Orders                     Orders       @relation(fields: [order_id], references: [order_id])
+  Package                    Package      @relation(fields: [pack_id], references: [pack_id])
+  OrderItems                 OrderItems[]
+  Shipment                   Shipment[]
+}
+
+model Customer {
+  cus_id          Int               @id @default(autoincrement())
+  cus_fname       String
+  cus_lname       String
+  cus_prime_sub   Boolean
+  cus_email       String
+  cus_phone       String
+  CustomerAddress CustomerAddress[]
+  Orders          Orders[]
+}
+
+model CustomerAddress {
+  cus_address_id     Int      @id @default(autoincrement())
+  cus_id             Int
+  cus_country        String
+  cus_state          String
+  cus_city           String
+  cus_street_address String
+  cus_postal_code    String
+  Customer           Customer @relation(fields: [cus_id], references: [cus_id])
+}
+
+model Shipment {
+  ship_id            Int        @id @default(autoincrement())
+  order_id           Int
+  order_pack_id      Int
+  ship_pickup_date   DateTime
+  ship_delivery_date DateTime
+  ship_network       Int
+  ship_status        String
+  Orders             Orders     @relation(fields: [order_id], references: [order_id])
+  OrderPacks         OrderPacks @relation(fields: [order_pack_id], references: [order_pack_id])
+}
+
+model Package {
+  pack_id             Int              @id @default(autoincrement())
+  pack_type           String
+  pack_length_cm      Decimal  @db.Decimal(10, 2)
+  pack_width_cm       Decimal  @db.Decimal(10, 2)
+  pack_height_cm      Decimal  @db.Decimal(10, 2)
+  pack_weight_limit_g Decimal  @db.Decimal(10, 2)
+  PackageUses         PackageUses[]
+  SellerPackages      SellerPackages[]
+  OrderPacks          OrderPacks[]
+}
+
+model PackageUses {
+  pack_id    Int
+  pack_usage String
+  Package    Package @relation(fields: [pack_id], references: [pack_id])
+
+  @@id([pack_id, pack_usage])
+}
+
+model Sellers {
+  seller_id      Int              @id @default(autoincrement())
+  seller_name    String
+  seller_email   String
+  seller_phone   String
+  SellerItems    SellerItems[]
+  SellersAddress SellersAddress[]
+  SellerPackages SellerPackages[]
+  OrderItems     OrderItems[]
+}
+
+model SellersAddress {
+  seller_address_id     Int     @id @default(autoincrement())
+  seller_id             Int
+  seller_country        String
+  seller_state          String
+  seller_city           String
+  seller_street_address String
+  seller_postal_code    String
+  Sellers               Sellers @relation(fields: [seller_id], references: [seller_id])
+}
+
+model SellerItems {
+  seller_items_id            Int     @id @default(autoincrement())
+  item_asin                  String
+  seller_id                  Int
+  seller_items_list_price    Decimal  @db.Decimal(10, 2)
+  seller_items_current_price Decimal  @db.Decimal(10, 2)
+  seller_items_rating        Decimal  @db.Decimal(10, 2)
+  seller_items_quantity      Int
+  Items                      Items   @relation(fields: [item_asin], references: [item_asin])
+  Sellers                    Sellers @relation(fields: [seller_id], references: [seller_id])
+}
+
+model SellerPackages {
+  seller_id             Int
+  pack_id               Int
+  seller_pack_available Boolean
+  Sellers               Sellers @relation(fields: [seller_id], references: [seller_id])
+  Package               Package @relation(fields: [pack_id], references: [pack_id])
+
+  @@id([seller_id, pack_id])
+}

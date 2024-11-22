@@ -1,22 +1,23 @@
+"use client";
 import ProductCard from "@/components/ProductCard";
 import SideBar from "./SideBar";
 import Heading from "./TopBar";
 import Pagination from "./Pagination";
 import BottomSign from "./BottomSign";
+import { useQuery } from "@tanstack/react-query";
+import { Items } from "@prisma/client";
+import axios from "axios";
 
-export interface Products {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-}
+export default function Products() {
+  const {
+    data: items,
+    error,
+    isLoading,
+  } = useQuery<Items[]>({
+    queryKey: ["items"],
+    queryFn: () => axios.get("/api/items").then((res) => res.data),
+  });
 
-export default async function Products() {
-  const products = await fetch("https://fakestoreapi.com/products").then(
-    (res) => res.json()
-  );
   return (
     <div>
       <Heading />
@@ -36,8 +37,8 @@ export default async function Products() {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {products.map((product: Products) => (
-              <ProductCard key={product.id} product={product} />
+            {items?.slice(0, 8)?.map((item) => (
+              <ProductCard key={item.item_asin} item={item} />
             ))}
           </div>
 

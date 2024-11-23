@@ -7,6 +7,9 @@ import BottomSign from "./BottomSign";
 import { useQuery } from "@tanstack/react-query";
 import { Items } from "@prisma/client";
 import axios from "axios";
+import ProductCardSkeleton from "@/components/ProductCardSkeleton";
+
+const itemSkeleton = Array.from({ length: 50 }, (_, i) => i + 1);
 
 export default function Products() {
   const {
@@ -37,9 +40,13 @@ export default function Products() {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {items?.slice(0, 8)?.map((item) => (
-              <ProductCard key={item.item_asin} item={item} />
-            ))}
+            {items
+              ? items
+                  ?.slice(0, 7)
+                  ?.map((item) => (
+                    <ProductCard key={item.item_asin} item={item} />
+                  ))
+              : itemSkeleton.map((item) => <ProductCardSkeleton key={item} />)}
           </div>
 
           <div className="flex justify-center mt-2.5">

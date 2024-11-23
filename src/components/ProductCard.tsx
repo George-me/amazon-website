@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import blank from "../app/assets/blank.png";
 import { useEffect, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import amazonPrime from "../app/assets/amazon_prime_icon.png";
@@ -38,10 +39,6 @@ const ProductCard = ({ item: { item_asin, item_name } }: Props) => {
   });
 
   useEffect(() => {
-    console.log("Fetched Images:", itemImages); // Add this line
-  }, [itemImages]);
-
-  useEffect(() => {
     setPrime(Math.random() < 0.5);
     setCoupon(Math.random() < 0.5);
     setBuyingOpts(Math.random() < 0.5);
@@ -64,7 +61,7 @@ const ProductCard = ({ item: { item_asin, item_name } }: Props) => {
 
         <Link href={`/products/${item_asin}`}>
           <Image
-            src={itemImages?.item_images_url || ""}
+            src={itemImages?.item_images_url || blank}
             alt={item_name}
             height={208}
             width={242}

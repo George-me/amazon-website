@@ -6,6 +6,7 @@ import {
   MapPinIcon,
   Bars3Icon,
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -13,12 +14,14 @@ const Header = () => {
       {/* Top navigation container */}
       <div className="flex justify-between items-center bg-amazon_blue">
         <div className="mt-1.5 px-1.5 flex-shrink-0">
-          <Image
-            alt="amazon logo"
-            src={amazonLogo}
-            height={40.5}
-            className="cursor-pointer m-1.5 pt-[6px] pr-2 pl-1.5"
-          />
+          <Link href={`/`}>
+            <Image
+              alt="amazon logo"
+              src={amazonLogo}
+              height={40.5}
+              className="cursor-pointer m-1.5 pt-[6px] pr-2 pl-1.5"
+            />
+          </Link>
         </div>
 
         {/* Search bar */}

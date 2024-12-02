@@ -2,8 +2,13 @@ import React from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { MapPinIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { Items } from "@prisma/client";
 
-const PRightColumn = () => {
+interface Props {
+  items: Items | undefined;
+}
+
+const PRightColumn = ({ items }: Props) => {
   return (
     <div className="flex-shrink-0 w-[245px]" id="right-column">
       <div className="border border-b-[1px] border-[#BBBFBF] rounded-lg">
@@ -12,7 +17,9 @@ const PRightColumn = () => {
           {/* Price section */}
           <div className="flex items-baseline mt-1">
             <span className="text-sm mt-1 self-start">AED</span>
-            <span className="text-3xl font-medium">762</span>
+            <span className="text-3xl font-medium px-[2px]">
+              {items?.item_price.toString()}
+            </span>
             <span className="text-sm mt-1 self-start">00</span>
           </div>
           <div className="absolute top-3 right-3 w-[17px] h-[17px] border-[5.2px] border-[#007185] rounded-xl" />
@@ -111,7 +118,10 @@ const PRightColumn = () => {
           {/* Price section */}
           <div className="flex items-baseline my-1">
             <span className="text-xs mt-1 self-start">AED</span>
-            <span className="text-xl font-medium">762</span>
+            <span className="text-xl font-medium px-[2px]">
+              {" "}
+              {items?.item_price.toString()}
+            </span>
             <span className="text-xs mt-1 self-start">00</span>
           </div>
           <p className="text-sm mb-3">

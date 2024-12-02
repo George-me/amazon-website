@@ -11,7 +11,7 @@ import SearchReviews from "./ReviewSection/SearchReviews";
 import Reviews from "./ReviewSection/Reviews";
 import BottomSign from "../BottomSign";
 import { useQuery } from "@tanstack/react-query";
-import { Items } from "@prisma/client";
+import { BuyWith, ItemImages, Items } from "@prisma/client";
 import axios from "axios";
 import Link from "next/link";
 
@@ -42,6 +42,34 @@ interface Props {
   };
 }
 
+type BuyItemWith = {
+  item_asin: string;
+  item_name: string;
+  item_url: string;
+  item_brand: string;
+  item_brand_url: string;
+  item_category: string;
+  item_sub_category: string;
+  item_length_cm: number;
+  item_weight_g: number;
+  item_price: number;
+  item_rating: number;
+  ItemImages: ItemImages[];
+};
+
+// type BuyItemWith = {
+//   item_asin: string;
+//   buyWith: BuyWith;
+//   item: Items | null; // The original item relation, nullable if not always included
+//   groupedItem: Items & { ItemImages: ItemImages[] }; // The related item with its images, nullable if not found
+// };
+
+// type BuyItemWith = {
+//   buyWith: BuyWith;
+//   item: Items | null; // If the original item relation is included
+//   groupedItem: Items | null; // The related item based on grouped_item_asin
+// };
+
 const page = ({ params: { slug } }: Props) => {
   // console.log(slug);
 
@@ -55,6 +83,19 @@ const page = ({ params: { slug } }: Props) => {
     queryFn: () => axios.get(`/api/items/${slug}`).then((res) => res.data),
   });
 
+  // Items request API call
+  const {
+    data: buyWith,
+    error: error2,
+    isLoading: isLoading2,
+  } = useQuery<BuyItemWith[]>({
+    queryKey: ["BuyWith", slug],
+    queryFn: () =>
+      axios.get(`/api/items/buy-with/${slug}`).then((res) => res.data),
+  });
+
+  // console.log(buyWith);
+
   return (
     <div>
       {/* Category navigation */}
@@ -64,7 +105,7 @@ const page = ({ params: { slug } }: Props) => {
       <div className="flex px-[18px] mt-5 space-x-5">
         <PLeftColumn item_asin={slug[0]} />
         <PMColumn items={items} />
-        <PRightColumn />
+        <PRightColumn items={items} />
       </div>
 
       {/* Horizontal Line */}
@@ -74,51 +115,61 @@ const page = ({ params: { slug } }: Props) => {
       <h1 className="text-[21px] font-bold pl-6 my-2">Buy it with</h1>
 
       <div className="flex pl-6">
-        {buyWithItems.map(({ img, description }, index) => (
-          <div key={index} className="flex">
-            <div className="w-[213px]">
-              <div className="relative flex justify-center py-2 rounded-xl">
-                <Image src={img} width={140} height={140} alt="Buy it item" />
+        {buyWith?.map(
+          ({ item_asin, item_price, item_name, ItemImages }, index) => (
+            <div key={index} className="flex">
+              <div className="w-[213px]">
+                <div className="relative flex justify-center py-2 rounded-xl">
+                  <Image
+                    src={ItemImages[0].item_images_url}
+                    width={140}
+                    height={140}
+                    alt="Buy it item"
+                    className="w-[140px] h-[140px] object-contain"
+                  />
 
-                {/* Grey background for product images */}
-                <div className="absolute top-0 left-0 w-full h-full rounded-xl bg-black opacity-[0.05] pointer-events-none" />
+                  {/* Grey background for product images */}
+                  <div className="absolute top-0 left-0 w-full h-full rounded-xl bg-black opacity-[0.05] pointer-events-none" />
 
-                <input
-                  type="checkbox"
-                  defaultChecked
-                  className="absolute top-2 right-2 form-checkbox accent-[#007185] rounded transform scale-125"
-                />
+                  <input
+                    type="checkbox"
+                    defaultChecked
+                    className="absolute top-2 right-2 form-checkbox accent-[#007185] rounded transform scale-125"
+                  />
+                </div>
+
+                <p className="text-sm line-clamp-3 mt-3">
+                  <span className={`font-bold ${index !== 0 && "hidden"}`}>
+                    This item:{" "}
+                  </span>{" "}
+                  <span
+                    className={`${
+                      index !== 0 && "sideLink text-[#007185] hover:underline"
+                    }`}
+                  >
+                    {item_name}
+                  </span>
+                </p>
+
+                {/* Price  */}
+                <div className="flex items-baseline">
+                  <span className="text-xs mt-1 self-start">AED</span>
+                  <span className="text-xl font-medium px-[2px]">
+                    {item_price}
+                  </span>
+                  <span className="text-xs mt-1 self-start">00</span>
+                </div>
               </div>
 
-              <p className="text-sm line-clamp-3 mt-3">
-                <span className={`font-bold ${index !== 0 && "hidden"}`}>
-                  This item:{" "}
-                </span>{" "}
-                <span
-                  className={`${
-                    index !== 0 && "sideLink text-[#007185] hover:underline"
-                  }`}
-                >
-                  {description}
+              {/* Plus icon separator */}
+              {index + 1 < buyWithItems.length && (
+                <span className="my-[60px] mx-1 text-[28px] text-[#565959] font-semibold">
+                  +
                 </span>
-              </p>
-
-              {/* Price  */}
-              <div className="flex items-baseline">
-                <span className="text-xs mt-1 self-start">AED</span>
-                <span className="text-xl font-medium">762</span>
-                <span className="text-xs mt-1 self-start">00</span>
-              </div>
+              )}
             </div>
-
-            {/* Plus icon separator */}
-            {index + 1 < buyWithItems.length && (
-              <span className="my-[60px] mx-1 text-[28px] text-[#565959] font-semibold">
-                +
-              </span>
-            )}
-          </div>
-        ))}
+          )
+        )}
 
         {/* Add all to cart button */}
         <div className="flex flex-col ml-3 h-32 items-center justify-center">

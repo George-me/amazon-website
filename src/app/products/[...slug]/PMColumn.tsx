@@ -73,7 +73,9 @@ const PMColumn = ({ items }: Props) => {
       <div className="flex items-baseline">
         <span className="text-2xl font-light mr-2 text-[#cc0c39]">-7%</span>
         <span className="text-sm mt-1 self-start">AED</span>
-        <span className="text-3xl font-medium">762</span>
+        <span className="text-3xl font-medium px-[2px]">
+          {items?.item_price.toString()}
+        </span>
         <span className="text-sm mt-1 self-start">00</span>
       </div>
       <div className="flex">

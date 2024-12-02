@@ -21,13 +21,16 @@ model Items {
   item_brand_url    String
   item_category     String
   item_sub_category String
-  item_length_cm    Decimal  @db.Decimal(10, 2)
-  item_width_cm     Decimal  @db.Decimal(10, 2)
-  item_height_cm    Decimal  @db.Decimal(10, 2)
-  item_weight_g     Decimal  @db.Decimal(10, 2)
+  item_length_cm    Decimal       @db.Decimal(10, 2)
+  item_width_cm     Decimal       @db.Decimal(10, 2)
+  item_height_cm    Decimal       @db.Decimal(10, 2)
+  item_weight_g     Decimal       @db.Decimal(10, 2)
+  item_price        Decimal       @db.Decimal(10, 2)
+  item_rating       Int
   ItemImages        ItemImages[]
   SellerItems       SellerItems[]
   OrderItems        OrderItems[]
+  BuyWith           BuyWith[]
 }
 
 model ItemImages {
@@ -35,6 +38,13 @@ model ItemImages {
   item_asin       String @map("item_asin")
   item_images_url String
   item            Items  @relation(fields: [item_asin], references: [item_asin])
+}
+
+model BuyWith {
+  item_id           Int    @id @default(autoincrement())
+  item_asin         String @map("item_asin")
+  grouped_item_asin String
+  item              Items  @relation(fields: [item_asin], references: [item_asin])
 }
 
 model Orders {
@@ -113,10 +123,10 @@ model Shipment {
 model Package {
   pack_id             Int              @id @default(autoincrement())
   pack_type           String
-  pack_length_cm      Decimal  @db.Decimal(10, 2)
-  pack_width_cm       Decimal  @db.Decimal(10, 2)
-  pack_height_cm      Decimal  @db.Decimal(10, 2)
-  pack_weight_limit_g Decimal  @db.Decimal(10, 2)
+  pack_length_cm      Decimal          @db.Decimal(10, 2)
+  pack_width_cm       Decimal          @db.Decimal(10, 2)
+  pack_height_cm      Decimal          @db.Decimal(10, 2)
+  pack_weight_limit_g Decimal          @db.Decimal(10, 2)
   PackageUses         PackageUses[]
   SellerPackages      SellerPackages[]
   OrderPacks          OrderPacks[]
@@ -156,9 +166,9 @@ model SellerItems {
   seller_items_id            Int     @id @default(autoincrement())
   item_asin                  String
   seller_id                  Int
-  seller_items_list_price    Decimal  @db.Decimal(10, 2)
-  seller_items_current_price Decimal  @db.Decimal(10, 2)
-  seller_items_rating        Decimal  @db.Decimal(10, 2)
+  seller_items_list_price    Decimal @db.Decimal(10, 2)
+  seller_items_current_price Decimal @db.Decimal(10, 2)
+  seller_items_rating        Decimal @db.Decimal(10, 2)
   seller_items_quantity      Int
   Items                      Items   @relation(fields: [item_asin], references: [item_asin])
   Sellers                    Sellers @relation(fields: [seller_id], references: [seller_id])

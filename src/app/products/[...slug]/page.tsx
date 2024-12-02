@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import CategoryNav from "./CategoryNav";
 import PLeftColumn from "./PLeftColumn";
@@ -10,7 +11,7 @@ import SearchReviews from "./ReviewSection/SearchReviews";
 import Reviews from "./ReviewSection/Reviews";
 import BottomSign from "../BottomSign";
 import { useQuery } from "@tanstack/react-query";
-import { ItemImages, Items } from "@prisma/client";
+import { Items } from "@prisma/client";
 import axios from "axios";
 import Link from "next/link";
 
@@ -42,31 +43,17 @@ interface Props {
 }
 
 const page = ({ params: { slug } }: Props) => {
-  console.log(slug);
+  // console.log(slug);
 
-  // // Items request API call
-  // const {
-  //   data: items,
-  //   error,
-  //   isLoading,
-  // } = useQuery<Items[]>({
-  //   queryKey: ["items", slug],
-  //   queryFn: () => axios.get(`/api/items/${slug}`).then((res) => res.data),
-  // });
-
-  // // ItemImages request API call
-  // const {
-  //   data: itemImages,
-  //   error: error2,
-  //   isLoading: isLoadingItemImages,
-  // } = useQuery<ItemImages>({
-  //   queryKey: ["itemImages", slug],
-  //   queryFn: () =>
-  //     axios.get(`/api/itemImages/images/${slug}`).then((res) => res.data),
-  //   retry: 5,
-  // });
-
-  // console.log(itemImages);
+  // Items request API call
+  const {
+    data: items,
+    error,
+    isLoading,
+  } = useQuery<Items>({
+    queryKey: ["items", slug],
+    queryFn: () => axios.get(`/api/items/${slug}`).then((res) => res.data),
+  });
 
   return (
     <div>
@@ -75,8 +62,8 @@ const page = ({ params: { slug } }: Props) => {
 
       {/* Page body content */}
       <div className="flex px-[18px] mt-5 space-x-5">
-        <PLeftColumn />
-        <PMColumn />
+        <PLeftColumn item_asin={slug[0]} />
+        <PMColumn items={items} />
         <PRightColumn />
       </div>
 
@@ -170,8 +157,11 @@ const page = ({ params: { slug } }: Props) => {
               No
             </li>
             <li>
-              <span className="font-bold">Product Dimensions :</span> 4.83 x
-              7.01 x 3.51 cm; 68.95 g
+              <span className="font-bold">Product Dimensions :</span>{" "}
+              {items?.item_length_cm.toString()} x{" "}
+              {items?.item_width_cm.toString()} x{" "}
+              {items?.item_height_cm.toString()} cm;{" "}
+              {items?.item_weight_g.toString()} g
             </li>
             <li>
               <span className="font-bold">Date First Available :</span> 18

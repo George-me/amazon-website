@@ -1,4 +1,4 @@
-import { StarIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
+import { StarIcon } from "@heroicons/react/24/solid";
 
 const ProductCardSkeleton = () => {
   return (

@@ -6,6 +6,7 @@ import {
   InformationCircleIcon,
 } from "@heroicons/react/24/solid";
 import { ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/outline";
+import { Items } from "@prisma/client";
 
 const buyingOptions = [
   {
@@ -40,16 +41,17 @@ const buyingOptions = [
   },
 ];
 
-const PMColumn = () => {
+interface Props {
+  items: Items | undefined;
+}
+
+const PMColumn = ({ items }: Props) => {
+  console.log(items);
   return (
     <div className="flex-1" id="center-column">
-      <h1 className="text-2xl font-semibolds">
-        New Bose QuietComfort Wireless Noise Cancelling Earbuds, Lifestyle
-        Bluetooth Earbuds with Active Noise Cancellation, Up to 8.5 Hours of
-        Battery Life, Black
-      </h1>
+      <h1 className="text-2xl font-semibolds">{items?.item_name}</h1>
       <p className="text-sm mt-1 sideLink text-[#007185] hover:underline">
-        Visit the Bose Store
+        {items?.item_brand}
       </p>
       <div className="flex space-x-1 items-end">
         <span className="text-sm">4.3 </span>

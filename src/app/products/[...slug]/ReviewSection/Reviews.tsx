@@ -36,8 +36,11 @@ const Reviews = () => {
         </span>
         <div className="my-2">415 global ratings</div>
         <div>
-          {ratings.map(({ rating, percentFill }) => (
-            <div className="flex text-sm items-center space-x-4 space-y-3 sideLink text-[#007185] hover:underline">
+          {ratings.map(({ rating, percentFill }, index) => (
+            <div
+              key={index}
+              className="flex text-sm items-center space-x-4 space-y-3 sideLink text-[#007185] hover:underline"
+            >
               <span>{rating} star</span>
               <div className="w-48 h-5 rounded border-[1.5px] border-[#888c8c]">
                 <div

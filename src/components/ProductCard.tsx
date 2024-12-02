@@ -31,7 +31,7 @@ const ProductCard = ({ item: { item_asin, item_name } }: Props) => {
     data: itemImages,
     error,
     isLoading,
-  } = useQuery<ItemImages>({
+  } = useQuery<ItemImages[]>({
     queryKey: ["itemImages", item_asin],
     queryFn: () =>
       axios.get(`/api/items/images/${item_asin}`).then((res) => res.data),
@@ -61,7 +61,7 @@ const ProductCard = ({ item: { item_asin, item_name } }: Props) => {
 
         <Link href={`/products/${item_asin}`}>
           <Image
-            src={itemImages?.item_images_url || blank}
+            src={itemImages?.[0].item_images_url || blank}
             alt={item_name}
             height={208}
             width={242}

@@ -1,6 +1,7 @@
 import React from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { MapPinIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const PRightColumn = () => {
   return (
@@ -48,9 +49,13 @@ const PRightColumn = () => {
               Quantity: 1
               <ChevronDownIcon className="h-4 w-4 mx-2 stroke-2" />
             </button>
-            <button className="mb-2 w-full rounded-full text-center text-sm py-1.5 cursor-pointer bg-[#ffd814] hover:bg-[#F7CA00] focus:outline-none focus:ring focus:ring-[#007185] focus:ring-offset-[1.5px] active:bg-[#F0B800]">
-              Add to Cart
-            </button>
+
+            <Link href={`/cart`}>
+              <button className="mb-2 w-full rounded-full text-center text-sm py-1.5 cursor-pointer bg-[#ffd814] hover:bg-[#F7CA00] focus:outline-none focus:ring focus:ring-[#007185] focus:ring-offset-[1.5px] active:bg-[#F0B800]">
+                Add to Cart
+              </button>
+            </Link>
+
             <button className="w-full rounded-full text-center text-sm py-1.5 cursor-pointer bg-[#FFA41C] hover:bg-[#FA8900] focus:outline-none focus:ring focus:ring-[#007185] focus:ring-offset-[1.5px] active:bg-[#FFA41C]">
               Buy Now
             </button>

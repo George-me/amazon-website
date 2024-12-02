@@ -1,5 +1,5 @@
 import Image from "next/image";
-import amazonLogo from "../app/assets/amazon_logo_white.png";
+import amazonLogo from "../app/assets/amazon-logo-ae.svg";
 import {
   MagnifyingGlassIcon,
   ShoppingCartIcon,

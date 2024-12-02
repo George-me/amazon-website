@@ -14,6 +14,16 @@ const productInfo = {
   ],
 };
 
+// interface ItemImage {
+//   item_images_id: number;
+//   item_asin: string;
+//   item_images_url: string;
+// }
+
+// interface Props {
+//   itemImages: ItemImage[];
+// }
+
 const PLeftColumn = () => {
   const [select, setSelect] = useState(0);
 

@@ -5,7 +5,7 @@ export async function GET(
   request: NextRequest,
   { params: { slug: asin } }: { params: { slug: string } }
 ) {
-  const itemImages = await prisma.itemImages.findFirst({
+  const itemImages = await prisma.itemImages.findMany({
     where: {
       item_asin: asin,
     },

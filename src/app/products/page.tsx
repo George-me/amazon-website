@@ -41,11 +41,9 @@ export default function Products() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {items
-              ? items
-                  ?.slice(0, 7)
-                  ?.map((item) => (
-                    <ProductCard key={item.item_asin} item={item} />
-                  ))
+              ? items.map((item) => (
+                  <ProductCard key={item.item_asin} item={item} />
+                ))
               : itemSkeleton.map((item) => <ProductCardSkeleton key={item} />)}
           </div>
 

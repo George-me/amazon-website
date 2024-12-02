@@ -9,6 +9,10 @@ import Carousel from "@/components/Carousel";
 import SearchReviews from "./ReviewSection/SearchReviews";
 import Reviews from "./ReviewSection/Reviews";
 import BottomSign from "../BottomSign";
+import { useQuery } from "@tanstack/react-query";
+import { ItemImages, Items } from "@prisma/client";
+import axios from "axios";
+import Link from "next/link";
 
 const buyWithItems = [
   {
@@ -38,6 +42,32 @@ interface Props {
 }
 
 const page = ({ params: { slug } }: Props) => {
+  console.log(slug);
+
+  // // Items request API call
+  // const {
+  //   data: items,
+  //   error,
+  //   isLoading,
+  // } = useQuery<Items[]>({
+  //   queryKey: ["items", slug],
+  //   queryFn: () => axios.get(`/api/items/${slug}`).then((res) => res.data),
+  // });
+
+  // // ItemImages request API call
+  // const {
+  //   data: itemImages,
+  //   error: error2,
+  //   isLoading: isLoadingItemImages,
+  // } = useQuery<ItemImages>({
+  //   queryKey: ["itemImages", slug],
+  //   queryFn: () =>
+  //     axios.get(`/api/itemImages/images/${slug}`).then((res) => res.data),
+  //   retry: 5,
+  // });
+
+  // console.log(itemImages);
+
   return (
     <div>
       {/* Category navigation */}
@@ -112,9 +142,12 @@ const page = ({ params: { slug } }: Props) => {
             <span className="text-xs mt-1 self-start mr-1">AED</span>
             <span className="text-lg font-medium">2,197.00</span>
           </div>
-          <button className="w-full mt-0.5 rounded-full text-center text-sm text-nowrap px-24 py-1.5 cursor-pointer bg-[#ffd814] hover:bg-[#F7CA00] focus:outline-none focus:ring focus:ring-[#007185] focus:ring-offset-[1.5px] active:bg-[#F0B800]">
-            Add all 3 to Cart
-          </button>
+
+          <Link href={`/cart`}>
+            <button className="w-full mt-0.5 rounded-full text-center text-sm text-nowrap px-24 py-1.5 cursor-pointer bg-[#ffd814] hover:bg-[#F7CA00] focus:outline-none focus:ring focus:ring-[#007185] focus:ring-offset-[1.5px] active:bg-[#F0B800]">
+              Add all 3 to Cart
+            </button>
+          </Link>
         </div>
       </div>
 

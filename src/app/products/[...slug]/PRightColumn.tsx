@@ -3,6 +3,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { MapPinIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { Items } from "@prisma/client";
+import DropDownButton from "@/components/DropDownButton";
 
 interface Props {
   items: Items | undefined;
@@ -52,10 +53,12 @@ const PRightColumn = ({ items }: Props) => {
           {/* Buttons Group */}
           <div id="Buttons-group">
             <p className="text-lg text-[#007600] pt-1 mb-3">In Stock</p>
-            <button className="flex items-center justify-between mb-2.5 w-full rounded-lg border border-[#D5D9D9] shadow-sm text-left text-[13px] pl-[11px] py-1.5 cursor-pointer bg-[#F0F2F2] hover:bg-[#E3E6E6] focus:outline-none focus:ring focus:ring-[#007185] focus:ring-offset-[1.5px] active:bg-[#F0F2F2]">
+            {/* <button className="flex items-center justify-between mb-2.5 w-full rounded-lg border border-[#D5D9D9] shadow-sm text-left text-[13px] pl-[11px] py-1.5 cursor-pointer bg-[#F0F2F2] hover:bg-[#E3E6E6] focus:outline-none focus:ring focus:ring-[#007185] focus:ring-offset-[1.5px] active:bg-[#F0F2F2]">
               Quantity: 1
               <ChevronDownIcon className="h-4 w-4 mx-2 stroke-2" />
-            </button>
+            </button> */}
+
+            <DropDownButton />
 
             <Link href={`/cart`}>
               <button className="mb-2 w-full rounded-full text-center text-sm py-1.5 cursor-pointer bg-[#ffd814] hover:bg-[#F7CA00] focus:outline-none focus:ring focus:ring-[#007185] focus:ring-offset-[1.5px] active:bg-[#F0B800]">
